@@ -1,5 +1,5 @@
 console.log('%c HI', 'color: firebrick')
-document.addEventListener("DOMContentLoaded",function(){console.log("The DOM has loaded");});
+
 
 //link variables
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
@@ -7,10 +7,11 @@ const breedUrl = 'https://dog.ceo/api/breeds/list/all'
 
 //html variables
 // let dogImageContainer = document.getElementById('dog-image-container')//add dog images here
-let breedDropdown = document.getElementById('breed-dropdown')//add event listener to this
+// let breedDropdown = document.getElementById('breed-dropdown')//add event listener to this
 
 // let dogBreedListContainer = document.getElementById('dog-breeds')//add dog breeds here in a list
-let dropdown = document.getElementsByTagName('select')
+let breedDropdown = document.getElementById('breed-dropdown') //declaring in her GUARENTEES that it will be able to render
+
 
 
 
@@ -104,16 +105,35 @@ let renderBreedFactory = (breeds) => {
     };
 
     }))
+
+    let handleChange = () => {
+        console.log('ive been changed')
+        
+    }
+
+    breedDropdown.addEventListener('change', handleChange)
+
+
+    
     
 }
 
 
 ////////////DELIVERABLE 4\\\\\\\\\\\
-console.log(breedDropdown)
-let handleChange = () => {
-    console.log('ive been changed')
-}
-breedDropdown.addEventListener('Change', handleChange)
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded",function(){
+    console.log("The DOM has loaded");
+    
+});
 
 //if a onclick - render A //event.target.value gives you input
 //else b onclick - render B
