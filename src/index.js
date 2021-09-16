@@ -11,7 +11,8 @@ const breedUrl = 'https://dog.ceo/api/breeds/list/all'
 
 // let dogBreedListContainer = document.getElementById('dog-breeds')//add dog breeds here in a list
 let breedDropdown = document.getElementById('breed-dropdown') //declaring in her GUARENTEES that it will be able to render
-
+let dogBreedListContainer = document.getElementById('dog-breeds')//add dog breeds here in a list
+   
 
 
 
@@ -70,28 +71,46 @@ fetch(breedUrl)
 .then(response => response.json())
 .then(breeds => renderBreedFactory(breeds))
 
+let breedsArray = []
 
 
 //iterave over breed object to grab each breed and put in li
 let renderBreedFactory = (breeds) => {
-    // console.log(Object.keys(breeds.message)) //all of the dog breed names are KEYS so use object.keys to select all of the keys within the larget object
-    (Object.keys(breeds.message)).forEach((breed => {
-        // console.log(breed) //check to see that all breeds are returned
+     // console.log(Object.keys(breeds.message)) //all of the dog breed names are KEYS so use object.keys to select all of the keys within the larget object
+     breedsArray = Object.keys(breeds.message)
+    //  console.log(breedsArray)
+     breedsArray.forEach(breed => {
+            renderBreed(breed)
+     })
+}
+  
 
-    //add each breed to li
+
+    renderBreed = (breed) => {
+        //add each breed to li
     let dogBreedLi = document.createElement('li') //creating li
     dogBreedLi.id = `${breed}-li` //naming each li with unique id according to breed name
 
     dogBreedLi.textContent = breed //changing tetx content to breed name
     dogBreedLi.style.color = 'black'
 
+
+    let dogBreedA = (dogBreedLi) => {
+        if (dogBreedLi.textContent.charAt(0) === a)
+        return breed
+        console.log(dogBreedLi)
+    } 
+    // let dogBreedB =
+    // let dogBreedC =
+    // let dogBreedD =
+
     //grab ul from DOM 
-    let dogBreedListContainer = document.getElementById('dog-breeds')//add dog breeds here in a list
+    
 
     //add dog breed li to ul
     dogBreedListContainer.appendChild(dogBreedLi)
-    
-    ///////////DELIVERABLE 3\\\\\\\\\\\
+
+       ///////////DELIVERABLE 3\\\\\\\\\\\
     //add onclick to specific li element 
     dogBreedLi.onclick = changeColor = () => {
         //changes color to red when clicked 
@@ -103,31 +122,30 @@ let renderBreedFactory = (breeds) => {
         }
         
     };
+    }
 
-    }))
+//     array.filter(function (item) {
+//         return item % charAt(0) === a;
+// })
 
-    let handleChange = () => {
+    //use .filter() to filter breeds that start with the letter
+
+    let handleChange = (event) => {
         console.log('ive been changed')
+
+        let letterChosen = event.target.value
+
+        let newArrayByLetter = breedsArray.filter(breed => breed.startsWith(letterChosen))
+        console.log(newArrayByLetter)
+        dogBreedListContainer.innerHTML = ""
+        newArrayByLetter.forEach(breed => {
+            
+            renderBreed(breed)
+        })
         
     }
 
     breedDropdown.addEventListener('change', handleChange)
-
-
-    
-    
-}
-
-
-////////////DELIVERABLE 4\\\\\\\\\\\
-
-
-
-
-
-
-
-
 
 
 document.addEventListener("DOMContentLoaded",function(){
